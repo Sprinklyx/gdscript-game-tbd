@@ -9,9 +9,9 @@ func _Ready():
 func OnMobAttackPlayer():
 	$Mob.Start($MobStart.position)
 	var attackRoute = get_node(^"MobPath/MobPathFollow")
-	attackRoute.progress = randi()
+	attackRoute.progress_ratio += 0.1 * 0.0167
 	#set mob's attack pattern
-	#var mobAttackPath = get_node(^"MobPath/MobPathFollow")
+
 
 
 	#logic for after player turn
@@ -36,3 +36,8 @@ func EnterBattle():
 	#adding visible ui location
 	$BattleScene.BattleUI($UIMarker.position)
 	
+func on_mob_attack_timeout() -> void():
+  OnMobAttackPlayer()
+  
+func _process(delta):
+  on_mob_attack_timeout()
